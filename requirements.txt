@@ -1,0 +1,10 @@
+numpy
+scipy
+matplotlib
+librosa
+noisereduce
+soundfile
+audioread
+numba
+tqdm
+joblib
