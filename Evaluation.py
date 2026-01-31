@@ -55,15 +55,6 @@ def run_evaluation():
 
     print("=" * 60)
 
-    # Tự động tạo bảng Markdown cho README.md
-    print("\n### [Copy đoạn này vào README.md]")
-    print("| Kỹ thuật lọc | SNR (dB) | Mức độ cải thiện |")
-    print("| :--- | :---: | :---: |")
-    print(f"| Gốc (Input) | {snr_in:.2f} dB | --- |")
-    for res in results:
-        print(f"| {res['name']} | {res['snr']:.2f} dB | **+{res['imp']:.2f} dB** |")
-    print("\n" + "=" * 60)
-
-
 if __name__ == "__main__":
+
     run_evaluation()
