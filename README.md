@@ -26,8 +26,8 @@ Biến đổi Fourier nhanh (FFT) giúp chúng ta chuyển đổi tín hiệu t�
 
 ![Phân tích FFT](Results/FFT.png)
 
-* **Quan sát kỹ thuật:** Đồ thị hiển thị mức năng lượng (Magnitude) cực lớn tập trung tại dải tần số thấp ($0Hz - 500Hz$). Đây là dấu hiệu của **nhiễu nền (Background Noise)** có cường độ mạnh, thường là tiếng ù từ môi trường hoặc thiết bị ghi.
-* **Phân tích:** Các dải năng lượng trải dài liên tục trên toàn bộ phổ tần số cho thấy sự hiện diện của **nhiễu trắng (White Noise)**. Việc phân tích FFT giúp nhóm xác định rằng nhiễu trong mẫu thực tế này là nhiễu băng rộng, khẳng định việc sử dụng **Spectral Gating** là giải pháp tối ưu hơn so với các bộ lọc thông thường.
+* **Quan sát kỹ thuật:** Đồ thị FFT hiển thị mức năng lượng (Magnitude) tập trung cực lớn tại dải tần số thấp ($0Hz - 1000Hz$), đạt ngưỡng trên $60$ dB. Đây là dấu hiệu của nhiễu nền (Background Noise) có cường độ mạnh, thường là tiếng ù từ môi trường hoặc thiết bị ghi.
+* **Phân tích IT:** Năng lượng nhiễu trải dài liên tục trên toàn bộ phổ tần cho thấy sự hiện diện của nhiễu trắng (White Noise). Việc phân tích FFT khẳng định nhiễu trong mẫu thực tế là nhiễu băng rộng, xác nhận việc kết hợp Band-pass để cô lập dải giọng nói là bước tiền xử lý bắt buộc trước khi áp dụng thuật toán thích nghi.
 
 ### 2. Phân tích Phổ thời gian (Spectrogram/STFT)
 Đồ thị Spectrogram cung cấp cái nhìn ba chiều về cường độ tín hiệu theo cả thời gian và tần số.
