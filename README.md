@@ -48,13 +48,6 @@ Phép so sánh trực tiếp biên độ tín hiệu trong miền thời gian gi
 
 ---
 
-| Kỹ thuật lọc | SNR (dB) | Mức độ cải thiện |
-| :--- | :---: | :---: |
-| Gốc (Input) | 10.86 dB | --- |
-| Low-pass Filter | 10.84 dB | **+-0.02 dB** |
-| Band-pass Filter | 15.45 dB | **+4.59 dB** |
-| Spectral Gating (Final) | 26.85 dB | **+15.99 dB** |
-
 ## 🚀 Hướng phát triển thêm (Future Work)
 * **Voice Activity Detection (VAD):** Tự động nhận diện đoạn im lặng để trích xuất Noise Profile tự động.
 * **Adaptive Filtering:** Nghiên cứu thuật toán LMS để xử lý nhiễu thay đổi theo thời gian (non-stationary noise).
