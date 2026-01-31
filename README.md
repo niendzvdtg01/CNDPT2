@@ -47,7 +47,11 @@ Phép so sánh trực tiếp biên độ tín hiệu trong miền thời gian gi
 * **Phân tích:** Việc đường màu cam giữ nguyên được cấu trúc của các đỉnh (peaks) của đường màu xanh cho thấy hệ thống đã loại bỏ nhiễu hiệu quả mà không gây ra hiện tượng méo tiếng (distortion) hay xén ngọn tín hiệu (clipping). Điều này chứng minh thuật toán đã cải thiện đáng kể **Tỷ số tín hiệu trên nhiễu (SNR)**.
 
 ---
-
+| Giai đoạn | Phương pháp | SNR (dB) | Cải thiện |
+| :--- | :--- | :---: | :---: |
+| **Đầu vào** | File gốc (Chưa xử lý) | 3.62 dB | --- |
+| **Đầu ra** | **Pipeline (BP + Spectral + LP)** | 17.74 dB | **+14.12 dB** |
+---
 ## 🚀 Hướng phát triển thêm (Future Work)
 * **Voice Activity Detection (VAD):** Tự động nhận diện đoạn im lặng để trích xuất Noise Profile tự động.
 * **Adaptive Filtering:** Nghiên cứu thuật toán LMS để xử lý nhiễu thay đổi theo thời gian (non-stationary noise).
