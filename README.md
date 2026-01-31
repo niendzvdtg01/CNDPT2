@@ -17,24 +17,34 @@ Hệ thống được triển khai theo một quy trình DSP (Digital Signal Pro
 
 ---
 
-## 🔬 Kết quả thực nghiệm & Đánh giá
+## 🔬 Phân tích Kỹ thuật và Đánh giá Thực nghiệm
 
-### 1. Phân tích phổ tần số (Frequency Analysis)
-Việc phân tích giúp xác định chính xác các dải tần nhiễu cần loại bỏ.
+Phần này trình bày kết quả phân tích chuyên sâu các biến đổi của tín hiệu âm thanh thông qua hệ thống xử lý, nhằm chứng minh hiệu quả của các thuật toán đã cài đặt.
+
+### 1. Phân tích Phổ tần số (FFT Spectrum)
+Biến đổi Fourier nhanh (FFT) giúp chúng ta chuyển đổi tín hiệu từ miền thời gian sang miền tần số để xác định đặc tính của nhiễu.
+
 ![Phân tích FFT](Results/FFT.png)
-*Hình 1: Biểu đồ FFT cho thấy các đỉnh nhiễu tại các tần số cụ thể.*
 
-![Phân tích STFT](Results/Stft.png)
-*Hình 2: Đồ thị STFT (Spectrogram) biểu diễn sự thay đổi của nhiễu theo thời gian.*
+* **Quan sát kỹ thuật:** Đồ thị hiển thị mức năng lượng (Magnitude) cực lớn tập trung tại dải tần số thấp ($0Hz - 500Hz$). Đây là dấu hiệu của **nhiễu nền (Background Noise)** có cường độ mạnh, thường là tiếng ù từ môi trường hoặc thiết bị ghi.
+* **Phân tích:** Các dải năng lượng trải dài liên tục trên toàn bộ phổ tần số cho thấy sự hiện diện của **nhiễu trắng (White Noise)**. Việc phân tích FFT giúp nhóm xác định rằng nhiễu trong mẫu thực tế này là nhiễu băng rộng, khẳng định việc sử dụng **Spectral Gating** là giải pháp tối ưu hơn so với các bộ lọc thông thường.
 
-### 2. So sánh kết quả trước và sau xử lý
-![So sánh âm thanh](Results/Compare_sound.png)
-*Hình 3: So sánh Waveform giữa tín hiệu nhiễu và tín hiệu sau khi được làm sạch.*
+### 2. Phân tích Phổ thời gian (Spectrogram/STFT)
+Đồ thị Spectrogram cung cấp cái nhìn ba chiều về cường độ tín hiệu theo cả thời gian và tần số.
 
-### 3. Chỉ số định lượng (Quantitative Metrics)
-Dựa trên kết quả chạy từ `Evaluation.py`:
-* **SNR (Signal-to-Noise Ratio):** Cải thiện đáng kể (tăng khoảng 9-10 dB), cho thấy giọng nói rõ nét hơn trên nền nhiễu.
-* **RMSE:** Giảm thiểu sai số, chứng minh thuật toán bám sát tín hiệu gốc.
+![Phân tích Spectrogram](Results/Stft.png)
+
+* **Quan sát:** Thang màu biểu thị cường độ (dB) cho thấy một "noise floor" (nền nhiễu) bao phủ đồng nhất trên toàn bộ các khung thời gian.
+* **Phân tích kỹ thuật:** Sự phân bố này xác nhận đây là **nhiễu tĩnh (Stationary Noise)**. Nhờ đặc tính này, thuật toán có thể trích xuất "Noise Profile" chính xác từ các đoạn không chứa giọng nói (silence) để tạo ra một mặt nạ phổ (Spectral Mask), giúp triệt tiêu nhiễu mà vẫn bảo tồn được các dải hài âm (Harmonics) cần thiết của tiếng người.
+
+### 3. Đánh giá sự biến đổi Dạng sóng (Waveform Comparison)
+Phép so sánh trực tiếp biên độ tín hiệu trong miền thời gian giữa file gốc (Original) và file sau lọc (Filtered).
+
+![So sánh Waveform](Results/Compare_sound.png)
+
+* **Đường màu xanh (Original):** Biên độ dao động dày đặc, bao phủ toàn bộ dải thời gian, cho thấy nhiễu lấp đầy các khoảng lặng giữa các câu nói.
+* **Đường màu cam (Filtered):** Biên độ nhiễu tại các đoạn lặng đã được làm phẳng về gần mức $0$.
+* **Phân tích:** Việc đường màu cam giữ nguyên được cấu trúc của các đỉnh (peaks) của đường màu xanh cho thấy hệ thống đã loại bỏ nhiễu hiệu quả mà không gây ra hiện tượng méo tiếng (distortion) hay xén ngọn tín hiệu (clipping). Điều này chứng minh thuật toán đã cải thiện đáng kể **Tỷ số tín hiệu trên nhiễu (SNR)**.
 
 ---
 
@@ -44,4 +54,3 @@ Dựa trên kết quả chạy từ `Evaluation.py`:
 * **Performance Optimization:** Tối ưu hóa code để giảm độ trễ (latency), hướng tới xử lý thời gian thực.
 
 ---
-
