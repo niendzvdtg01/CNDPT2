@@ -51,6 +51,8 @@ Phép so sánh trực tiếp biên độ tín hiệu trong miền thời gian gi
 | :--- | :--- | :---: | :---: |
 | **Đầu vào** | File gốc (Chưa xử lý) | 3.62 dB | --- |
 | **Đầu ra** | **Pipeline (BP + Spectral + LP)** | 17.74 dB | **+14.12 dB** |
+
+* **Kết luận:** Với file đầu vào có độ nhiễu cực cao (3.62 dB), mức cải thiện +14.12 dB tương đương với việc giảm năng lượng nhiễu đi khoảng 25 lần. Hệ thống đã chuyển đổi thành công một bản ghi âm thực tế từ trạng thái không đạt chuẩn sang trạng thái có thể sử dụng cho các mục đích truyền thông chuyên nghiệp.
 ---
 ## 🚀 Hướng phát triển thêm (Future Work)
 * **Voice Activity Detection (VAD):** Tự động nhận diện đoạn im lặng để trích xuất Noise Profile tự động.
