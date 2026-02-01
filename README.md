@@ -49,25 +49,26 @@ Sử dụng biến đổi Fourier nhanh (FFT) để chuyển tín hiệu sang mi
 
 ![Phân tích FFT](Results/FFT.png)
 
-* **Quan sát kỹ thuật**: Đồ thị FFT hiển thị mức năng lượng (Magnitude) tập trung cực lớn tại dải tần số thấp ($0Hz - 1000Hz$), đạt ngưỡng trên $60$ dB. Đây là dấu hiệu của **nhiễu nền (Background Noise)** cường độ mạnh từ môi trường hoặc thiết bị ghi.
-* **Phân tích IT**: Năng lượng nhiễu trải dài liên tục trên toàn bộ phổ tần cho thấy sự hiện diện của **nhiễu trắng (White Noise)**. Việc phân tích FFT khẳng định nhiễu trong mẫu thực tế là nhiễu băng rộng, xác nhận việc kết hợp bộ lọc **Band-pass** để cô lập dải giọng nói là bước tiền xử lý bắt buộc.
+* **Phân phối năng lượng:** Năng lượng tập trung chủ yếu ở dải tần thấp ($< 2000$ Hz), phản ánh đặc điểm của giọng nói hoặc tiếng ồn môi trường tự nhiên.
+* **Độ dốc phổ (Spectral Tilt):** Biên độ giảm dần từ $60$ dB xuống $-20$ dB khi tần số tăng cao. Việc không có các đỉnh nhọn bất thường ở dải tần cao cho thấy hệ thống không bị nhiễu răng cưa (aliasing).
 
 ### 2. Phân tích Phổ thời gian (Spectrogram/STFT)
 Biểu đồ Spectrogram cung cấp cái nhìn ba chiều về cường độ tín hiệu theo cả thời gian và tần số trên thang Logarithm.
 
 ![Phân tích Spectrogram](Results/Stft.png)
 
-* **Quan sát**: Thang màu từ $-80$ dB đến $0$ dB (bảng màu Magma) cho thấy một "noise floor" (nền nhiễu) bao phủ đồng nhất xuyên suốt các khung thời gian (trục Time).
-* **Phân tích kỹ thuật**: Sự phân bổ đồng nhất này xác nhận đây là **nhiễu tĩnh (Stationary Noise)**. Đặc tính này cho phép thuật toán **Spectral Gating** trích xuất "Noise Profile" chính xác từ đoạn im lặng ($0.5$s đầu) để tạo mặt nạ phổ hiệu quả mà vẫn bảo tồn được các dải hài âm (Harmonics) sáng màu của giọng nói con người.
+* **Harmonics (Họa âm):** Các đường kẻ ngang sáng màu ở vùng $256$ Hz - $2048$ Hz, thể hiện cấu trúc của âm thanh hữu ích.
+* **Spectral Gating:** Các vùng tối (màu đen/tím) ở dải tần cao thể hiện sự hiệu quả của việc triệt tiêu nhiễu nền (noise floor removal).
+* **Temporal Consistency:** Sự liên tục của các vệt sáng theo trục thời gian cho thấy pipeline xử lý mượt mà, không gây ra hiện tượng ngắt quãng tín hiệu.
 
 ### 3. Đánh giá sự biến đổi Dạng sóng (Waveform Comparison)
 Phép so sánh trực tiếp biên độ tín hiệu trong miền thời gian giữa file gốc (Original) và file sau khi qua toàn bộ Pipeline xử lý (Filtered).
 
 ![So sánh Waveform](Results/Compare_sound.jpg)
 
-* **Đường màu xám (Original)**: Biên độ dao động dày đặc bao phủ toàn bộ dải thời gian, minh chứng nhiễu nền lấp đầy các khoảng lặng giữa các câu nói.
-* **Đường màu xanh (Filtered)**: Biên độ nhiễu tại các đoạn im lặng đã được làm phẳng hoàn toàn về gần mức $0$.
-* **Phân tích**: Hệ thống giữ nguyên được cấu trúc của các đỉnh (peaks) biểu thị giọng nói so với bản gốc. Điều này minh chứng thuật toán loại bỏ nhiễu hiệu quả mà không gây ra hiện tượng méo tiếng (distortion) hay xén ngọn tín hiệu (clipping), giúp cải thiện đáng kể độ rõ nét của thông tin.
+Biểu đồ so sánh giữa tín hiệu gốc (Original) và tín hiệu sau khi qua pipeline xử lý (Filtered).
+* **Nhiễu nền (Noise Floor):** Tín hiệu gốc (màu xám) chứa lượng lớn nhiễu trắng với biên độ dao động quanh mức $0.1$. Sau khi xử lý (màu xanh), các khoảng lặng được làm sạch hoàn toàn, đưa biên độ nhiễu về xấp xỉ $0$.
+* **Bảo toàn đặc trưng (Transient Preservation):** Các đỉnh tín hiệu quan trọng (Signal Peaks) vẫn giữ được biên độ và hình dạng gốc, cho thấy thuật toán lọc không gây ra hiện tượng méo tiếng (distortion) nghiêm trọng hoặc làm sụt giảm năng lượng của âm thanh mục tiêu.
 
 ---
 ## 📏 Đánh giá chất lượng (Evaluation Metrics)
