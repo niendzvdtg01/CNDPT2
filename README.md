@@ -1,7 +1,7 @@
 # 🎙️ Hệ Thống Lọc Nhiễu Âm Thanh Ghi Âm Thực Tế (Noise Reduction System)
 
 ## 📝 Giới thiệu đề tài
-Dự án tập trung vào việc xây dựng hệ thống xử lý tín hiệu số để cải thiện chất lượng âm thanh từ các nguồn ghi âm thực tế bị lẫn nhiễu môi trường. Hệ thống được thiết kế để Cải thiện chất lượng ghi âm thực tế khỏi các tạp âm thông qua các kỹ thuật phân tích phổ và bộ lọc số.
+Dự án tập trung vào việc xây dựng hệ thống xử lý tín hiệu số để cải thiện chất lượng âm thanh từ các nguồn ghi âm thực tế bị lẫn nhiễu môi trường. Hệ thống được thiết kế để cải thiện chất lượng ghi âm thực tế khỏi các tạp âm thông qua các kỹ thuật phân tích phổ và bộ lọc số.
 
 ## ⚙️ Quy trình xử lý (Audio Processing Pipeline)
 Hệ thống vận hành theo mô hình **Sequential Pipeline** (Chuỗi xử lý nối tiếp). Trong mô hình này, tín hiệu đầu ra của module trước sẽ đóng vai trò là dữ liệu đầu vào cho module sau, giúp tối ưu hóa khả năng triệt tiêu nhiễu qua từng tầng xử lý.
