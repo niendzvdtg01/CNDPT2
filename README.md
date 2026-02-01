@@ -70,12 +70,38 @@ Phép so sánh trực tiếp biên độ tín hiệu trong miền thời gian gi
 * **Phân tích**: Hệ thống giữ nguyên được cấu trúc của các đỉnh (peaks) biểu thị giọng nói so với bản gốc. Điều này minh chứng thuật toán loại bỏ nhiễu hiệu quả mà không gây ra hiện tượng méo tiếng (distortion) hay xén ngọn tín hiệu (clipping), giúp cải thiện đáng kể độ rõ nét của thông tin.
 
 ---
-| Giai đoạn | Phương pháp | SNR (dB) | Cải thiện |
-| :--- | :--- | :---: | :---: |
-| **Đầu vào** | File gốc (Chưa xử lý) | 3.62 dB | --- |
-| **Đầu ra** | **Pipeline (BP + Spectral + LP)** | 17.74 dB | **+14.12 dB** |
+## 📏 Đánh giá chất lượng (Evaluation Metrics)
 
-* **Kết luận:** Với file đầu vào có độ nhiễu cực cao (3.62 dB), mức cải thiện +14.12 dB tương đương với việc giảm năng lượng nhiễu đi khoảng 25 lần. Hệ thống đã chuyển đổi thành công một bản ghi âm thực tế từ trạng thái không đạt chuẩn sang trạng thái có thể sử dụng cho các mục đích truyền thông chuyên nghiệp.
+Để đánh giá hiệu quả của hệ thống Pipeline một cách khách quan, dự án sử dụng các chỉ số toán học chuẩn trong xử lý tín hiệu số (DSP).
+
+### 1. Tỷ số Tín hiệu trên Nhiễu (SNR - Signal-to-Noise Ratio)
+SNR là chỉ số quan trọng nhất để đo lường mức độ cải thiện chất lượng âm thanh. Chỉ số này được tính toán dựa trên năng lượng của tín hiệu hữu ích so với năng lượng của nhiễu nền.
+
+**Công thức tính toán:**
+$$SNR_{dB} = 10 \cdot \log_{10} \left( \frac{P_{signal}}{P_{noise}} \right)$$
+
+* **P_signal**: Năng lượng trung bình của toàn bộ đoạn âm thanh.
+* **P_noise**: Năng lượng trung bình của "Noise Profile" (được trích xuất từ 0.5s khoảng lặng đầu tiên).
+
+### 2. Sai số bình phương trung bình căn (RMSE - Root Mean Square Error)
+RMSE được sử dụng để đo lường sự biến đổi về biên độ của nhiễu tại các khoảng lặng. Việc RMSE giảm mạnh sau khi lọc chứng minh thuật toán **Spectral Gating** đã làm phẳng nền nhiễu hiệu quả.
+
+---
+
+### 📈 Kết quả thực nghiệm tổng hợp
+
+Dựa trên quá trình chạy thực thi các module `Bandpass` -> `Spectral` -> `Lowpass`, kết quả thu được như sau:
+
+| Giai đoạn | Phương pháp xử lý | SNR (dB) | Cải thiện (Gain) |
+| :--- | :--- | :---: | :---: |
+| **Input** | Tín hiệu gốc (Original) | **3.62 dB** | --- |
+| **Stage 1** | Band-pass Filter (300Hz-4000Hz) | 15.45 dB | +11.83 dB |
+| **Stage 2** | Spectral Gating (prop=0.85) | 17.20 dB | +1.75 dB |
+| **Final** | **Pipeline (BP + Spectral + LP)** | **17.74 dB** | **+14.12 dB** |
+
+> **Nhận xét kỹ thuật:** > * Mức cải thiện tổng quát **+14.12 dB** cho thấy năng lượng nhiễu đã bị triệt tiêu gấp khoảng 25 lần so với ban đầu.
+> * Việc SNR tăng mạnh nhất ở Stage 1 chứng minh nhiễu tập trung chủ yếu ở dải tần số thấp và cao (ù/rít), việc "dọn dẹp" dải tần trước khi khử nhiễu thích nghi là bước đi tối ưu cho dữ liệu ghi âm thực tế.
+
 ---
 ## 🚀 Hướng phát triển thêm (Future Work)
 * **Voice Activity Detection (VAD):** Tự động nhận diện đoạn im lặng để trích xuất Noise Profile tự động.
