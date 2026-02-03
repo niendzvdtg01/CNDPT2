@@ -2,7 +2,7 @@ import numpy as np
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-from Load_audio import audio, sr
+from Buoc_1.Load_audio import audio, sr
 
 # 1. Đảm bảo thư mục Results tồn tại để lưu ảnh báo cáo
 if not os.path.exists("Results"):
