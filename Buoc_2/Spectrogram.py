@@ -3,7 +3,7 @@ import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from Load_audio import audio, sr
+from Buoc_1.Load_audio import audio, sr
 
 # 1. Thực hiện STFT với cửa sổ phân tích tối ưu cho giọng nói
 # n_fft=2048, hop_length=512 là thông số chuẩn để cân bằng độ phân giải
